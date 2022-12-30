@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:my_project/pages/home.dart';
 import 'package:my_project/pages/loging_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:my_project/utils/routes.dart';
 
 void main() {
   runApp(MyApp());
@@ -26,8 +27,8 @@ class MyApp extends StatelessWidget {
       initialRoute: "/",
       routes: {
         "/": (context) => LogingPage(),
-        "/home": (context) => HomePage(),
-        "/Loging": (context) => LogingPage()
+        MyRoutes.homeRoute: (context) => HomePage(),
+        MyRoutes.loginRoute: (context) => LogingPage()
       },
     );
   }
