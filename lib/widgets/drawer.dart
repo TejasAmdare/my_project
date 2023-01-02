@@ -25,8 +25,8 @@ class MyDrawer extends StatelessWidget {
                 // decoration: BoxDecoration(color: Colors.green),
                 accountName: Text("Tejas Amdare"),
                 accountEmail: Text("tejasamdare@gmail.com"),
-                currentAccountPicture:
-                    CircleAvatar(backgroundImage: NetworkImage(imageUrl)),
+                currentAccountPicture: CircleAvatar(
+                    radius: 50, backgroundImage: NetworkImage(imageUrl)),
               ),
             ),
             ListTile(
