@@ -6,6 +6,8 @@ import 'package:my_project/models/catalog.dart';
 import 'package:my_project/widgets/item_widget.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -13,41 +15,41 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final int days = 30;
   final String name = "Codepur";
+
+  Catalog? catalog;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     loadData();
     setState(() {});
   }
 
   loadData() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     final catalogjson =
         await rootBundle.loadString("assets/files/catalog.json");
     final decodeData = jsonDecode(catalogjson);
-    var prodectsData = decodeData["products"];
-    CatalogModel.items = List.from(prodectsData)
-        .map<Item>((item) => Item.fromMap(item))
-        .toList();
+
+    catalog = Catalog.fromJson(decodeData);
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Catalog App"),
+        title: const Text("Catalog App"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: (CatalogModel.items != null && CatalogModel.items.isNotEmpty)
+        child: (catalog?.products != null && catalog!.products!.isNotEmpty)
             ? ListView.builder(
-                itemCount: CatalogModel.items.length,
+                itemCount: catalog?.products?.length,
                 itemBuilder: (context, index) {
-                  return IteamWidget(item: CatalogModel.items[index]);
+                  return IteamWidget(item: catalog!.products![index]);
                 },
               )
-            : Center(
+            : const Center(
                 child: CircularProgressIndicator(),
               ),
       ),
